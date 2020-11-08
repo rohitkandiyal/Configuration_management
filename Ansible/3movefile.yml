@@ -1,0 +1,16 @@
+#Copying a static file and a dynamic file using templates.
+#Concepts involved: Files ,Templates, copy  
+
+
+- name: Copy static and dynamic files. 
+  hosts: useradd_grp
+  vars:
+    f_name: "Rohit"
+    l_name: "Kandiyal" 
+  tasks:
+   - name: Create a directory 
+     file: path="/tmp/ansible_dir" state=directory
+   - name: Copy static file 
+     copy: src="/playbooks/files/ansible.txt" dest="/tmp/ansible_dir/ansible_dest.txt"
+   - name: Copy dynamic file using template 
+     template: src="/playbooks/templates/template_intro.txt.j2" dest="/tmp/ansible_dir/template_intro_dest.txt"

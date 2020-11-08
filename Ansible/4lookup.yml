@@ -1,0 +1,12 @@
+#checking the usage of lookups in ansible
+
+- name: Lookup usage
+  hosts: localhost
+  vars:
+    lookup_pwd: "{{lookup('env','ROHIT')}}"
+  pre_tasks:
+    - fail: msg="Parameter lookup_pwd is not defined"
+      when: lookup_pwd == ""
+  tasks:
+    - name: Printing debug message with lookup
+      debug: var=lookup_pwd

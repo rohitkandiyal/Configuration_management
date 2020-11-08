@@ -1,0 +1,14 @@
+#
+#Used to capture the output of any task in a variable which can then be used later in the playbook
+
+- name: register usage
+  hosts: localhost
+
+  tasks:
+    - name: Executing shell command
+      shell: echo "rohit"
+    - name: Executing shell command and fetching the results
+      shell: pwd
+      register: abc
+    - name: Print shell output
+      debug: msg="The output is {{abc.stdout_lines}}"

@@ -1,0 +1,16 @@
+#Creating a user by reading username from the variables defined
+#Concepts involved: Ansible Variable
+
+- name: Add User
+  hosts: useradd_grp 
+  vars:
+    user_name: "user_var"	#This is variable being set to be used later.
+  tasks:
+   - name: Add new user
+     user: name="{{ user_name }}" comment="Ansible user set as variable created"
+     
+   - name: show a debug/log message
+     debug: msg="Log Message...."
+   - name: show a variable value
+     debug: var=user_name
+

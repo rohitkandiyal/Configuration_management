@@ -1,0 +1,1 @@
+This is a static file which would be copied from Ansible centralized control manager to managed nodes.

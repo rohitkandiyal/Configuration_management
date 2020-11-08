@@ -1,0 +1,6 @@
+#Basic yaml to create a user using ansible.
+- name: Add User
+  hosts: useradd_grp 
+  tasks:
+   - name: Add new user
+     user: name="user1" comment="Ansible user created"
