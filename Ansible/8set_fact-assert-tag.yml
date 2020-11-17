@@ -1,0 +1,20 @@
+- set_fact:
+
+    #lookup get_cf_stack_status is a python script using boto3 in cf-ansible/lookup_plugins folder. This script basically gives output:missing,ready,notready    #
+
+    stack_preinstall_status: "{{ lookup('get_cf_stack_status',profile=profile,stack_name=stack_name) }}"
+  failed_when: stack_preinstall_status == ""
+  tags:
+     - deploy
+     - create_changeset
+     - execute_changeset
+
+## Validation of stack status
+- assert:
+    that:
+      - "stack_preinstall_status in ['ready','missing']"
+    msg:  "{{stack_name}} in status which does not allow deployment"       #this is actually fail_msg and was msg earlier to ansible ver 2.7
+  tags:									   # as if now msg aliases to fail_msg. So this will be printed if assertions fails.
+     - deploy
+     - create_changeset
+     - execute_changeset
