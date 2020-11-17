@@ -1,0 +1,24 @@
+- name: Verify apache installation
+  hosts: localhost_grp 
+  remote_user: root
+  vars:
+    f_name: "Rohit"
+    l_name: "Kandiyal1"
+
+  tasks:
+  #- name: Ensure apache is at the latest version
+  #  ansible.builtin.yum:
+  #    name: httpd
+  #    state: latest
+    - name: ensure a directory exists
+      file:
+        path: /tmp/ansible_dir
+        state: directory
+    - name: Copy dynamic file using template
+      template: src="/playbooks/templates/template_intro.txt.j2" dest="/tmp/ansible_dir/template_intro_dest.txt"
+      notify:
+        - Restart apache
+
+  handlers:
+    - name: Restart apache
+      debug: msg="Handler has been executed..."

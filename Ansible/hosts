@@ -1,6 +1,9 @@
+#ansible all -i hosts -k -m ping                -k is used to execute by giving password
+#ansible_node ansible_ssh_host=192.168.56.28 ansible_ssh_port=22 ansible_ssh_user=root
+
+
 [useradd_grp]
-
-#ansible all -i hosts -k -m ping		-k is used to execute by giving password
-#ansible_node ansible_ssh_host=192.168.56.28 ansible_ssh_port=22 ansible_ssh_user=root  
-
 ansible_node ansible_ssh_host=192.168.56.28 ansible_ssh_port=22 ansible_ssh_user=root ansible_ssh_pass=Symantec@123 
+
+[localhost_grp]
+ansible_master ansible_ssh_host=192.168.56.27 ansible_ssh_port=22 ansible_ssh_user=root ansible_ssh_pass=Symantec@123 

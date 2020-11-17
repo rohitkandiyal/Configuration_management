@@ -1,0 +1,41 @@
+#to understand testing in playbooks
+
+
+- name: test in playbook
+  hosts: localhost_grp 
+  vars:
+    url: "http://example.com/users/foo/resources/bar"
+    my_version: 1.2.3
+
+  tasks:
+
+# STRING TEST: test can be done with match, regex, search
+
+   - name: show a debug/log message based on the test result
+     debug: msg="Log Message when match is found"
+     when: url is match("http://example.com/users/.*/resources/")
+   - name: show a debug/log message based on the test result
+     debug: msg="Log Message when match is found"
+     when: url is match("http://exam.com/users/.*/resources/")
+
+# VERSION TEST: checking version test... we can check the version from ansible facts too from the node machine.
+  
+   - name: validate the version
+     debug: msg="Version is greater than 1.2.0"
+     when: my_version is version('1.2.0', '>')
+   - name: validate the version
+     debug: msg="Version is equal to 1.2.0"
+     when: my_version is version('1.2.0', '=')
+
+#####OTHER AVAILABLE TESTS ARE:
+# when: mypath is directory     when: mypath is file     when: mypath is exists
+#
+# we can also execute a task based on the exit status of another task... check 5register.yaml
+#
+#
+#
+#
+#
+#
+#
+#

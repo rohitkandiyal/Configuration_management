@@ -10,5 +10,9 @@
     - name: Executing shell command and fetching the results
       shell: pwd
       register: abc
+
+#checking the task result... it can be used to execute a task based on the output of another task.. handler/notify is also used and seems better.
+
     - name: Print shell output
       debug: msg="The output is {{abc.stdout_lines}}"
+      when: abc is failed
